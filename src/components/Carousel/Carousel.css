@@ -1,0 +1,39 @@
+.carousel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.carousel-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.carousel-item {
+    font-family: "JetBrains Mono", monospace;
+    padding: 12px 24px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    color: var(--color-text);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-item:hover {
+    color: var(--color-highlight);
+    border-color: var(--color-secondary);
+    transform: translateY(-4px);
+}
+
+.carousel-item.active {
+    color: var(--color-highlight);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    font-weight: 600;
+}
