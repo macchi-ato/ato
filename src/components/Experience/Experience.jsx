@@ -2,22 +2,12 @@ import "./Experience.css"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls, useGLTF } from "@react-three/drei"
 
-interface ModelProps {
-    path: string
-}
-
-function Model({ path }: ModelProps) {
+function Model({ path }) {
     const { scene } = useGLTF(path)
-    
     return <primitive object={scene} />
 }
 
-interface ExperienceProps {
-    modelPath: string
-}
-
-export default function Experience({ modelPath }: ExperienceProps) {
-
+export default function Experience({ modelPath }) {
     return (
         <div className="experience-container">
             <Canvas camera={{ position: [0, 3, 8] }}>

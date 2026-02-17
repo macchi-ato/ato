@@ -1,13 +1,6 @@
-import type { Model } from "../../data/models"
 import "./Carousel.css"
 
-interface CarouselProps {
-    models: Model[]
-    selectedId: string
-    onSelect: (id: string) => void
-}
-
-export default function Carousel({ models, selectedId, onSelect }: CarouselProps) {
+export default function Carousel({ models, selectedId, onSelect }) {
   return (
     <div className="carousel">
       <div className="carousel-container">
