@@ -1,5 +1,5 @@
 import "./App.css"
-import Experience from "./Experience/Experience.jsx"
+import Experience from "./experience/Experience.jsx"
 
 function App() {
     return (
