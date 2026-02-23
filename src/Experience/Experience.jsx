@@ -40,7 +40,7 @@ export default function Experience() {
                     <ambientLight intensity={0.5} />
                     <directionalLight position={[5, 5, 5]} />
                     <Model path={currentModel.path}/>
-                    <OrbitControls />
+                    <OrbitControls maxPolarAngle={Math.PI / 2} enablePan={false} />
                 </Canvas>
             </div>
 
