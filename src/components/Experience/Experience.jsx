@@ -1,28 +1,45 @@
 import "./Experience.css"
-import { Canvas } from "@react-three/fiber"
+import { Canvas, useThree } from "@react-three/fiber"
 import { OrbitControls, useGLTF } from "@react-three/drei"
 import { models } from "../../data/models.js"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function Model({ path }) {
     const { scene } = useGLTF(path)
     return <primitive object={scene} />
 }
 
-export default function Experience() {
-    const [ modelPath, setModelPath ] = useState("/jiku.glb")
+function CameraUpdater({ camera: cameraProps }) {
+    const { camera } = useThree()
 
-    const setModel = (modelPath) => {
-        setModelPath(modelPath)
+    useEffect(() => {
+        if (cameraProps?.position) {
+            camera.position.set(...cameraProps.position)
+        }
+        if (cameraProps?.fov) {
+            camera.fov = cameraProps.fov
+            camera.updateProjectionMatrix()
+        }
+    }, [camera, cameraProps])
+
+    return null
+}
+
+export default function Experience() {
+    const [ currentModel, setCurrentModel ] = useState(models[0])
+
+    const setModel = (model) => {
+        setCurrentModel(model)
     }
 
     return (
         <>
             <div className="experience-container">
-                <Canvas camera={{ position: [0, 3, 8] }}>
+                <Canvas camera={{ position: currentModel.camera.position, fov: currentModel.camera.fov }}>
+                    <CameraUpdater camera={currentModel.camera} />
                     <ambientLight intensity={0.5} />
                     <directionalLight position={[5, 5, 5]} />
-                    <Model path={modelPath}/>
+                    <Model path={currentModel.path}/>
                     <OrbitControls />
                 </Canvas>
             </div>
@@ -32,8 +49,8 @@ export default function Experience() {
                 {models.map((model) => (
                     <button
                         key={model.id}
-                        className={`carousel-item ${model.path === modelPath ? "active" : ""}`}
-                        onClick={() => setModel(model.path)}
+                        className={`carousel-item ${model.id === currentModel.id ? "active" : ""}`}
+                        onClick={() => setModel(model)}
                     >
                     {model.name}
                     </button>
