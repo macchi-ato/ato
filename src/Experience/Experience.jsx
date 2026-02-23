@@ -1,7 +1,7 @@
 import "./Experience.css"
 import { Canvas, useThree } from "@react-three/fiber"
 import { OrbitControls, useGLTF } from "@react-three/drei"
-import { models } from "../../data/models.js"
+import { models } from "../data/models.js"
 import { useState, useEffect } from "react"
 
 function Model({ path }) {
